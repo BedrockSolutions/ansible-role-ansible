@@ -1,0 +1,21 @@
+---
+
+- block:
+    - validate:
+        schema:
+          type: object
+          properties:
+            command:
+              type: string
+              enum:
+                - controller_reset_connection
+                - create_ansible_temp_directory
+                - delete_remote_files
+                - dependency
+          required:
+            - command
+        instance: "{{ common }}"
+
+    - include_tasks: '{{ common.command }}.yml'
+  tags:
+    - common

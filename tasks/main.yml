@@ -1,0 +1,4 @@
+---
+
+- include_tasks: ansible.yml
+  when: (ansible is not defined) or ('command' not in ansible) or (ansible.command != 'dependency')

@@ -1,0 +1,27 @@
+---
+
+- block:
+  - validate:
+      schema:
+        type: object
+        additionalProperties:
+          - command
+        properties:
+          fileglob:
+            type: string
+        required:
+          - fileglob
+      instance: "{{ common }}"
+    register: common_validated
+
+    - set_fact:
+        common_v: "{{ common_validated.result }}"
+
+  - name: "Delete remote files {{ common_v.fileglob }}"
+    file:
+      path: ~/.ansible/cp
+      state: absent
+    delegate_to: localhost
+    changed_when: false
+  tags:
+    - common_delete_remote_files
