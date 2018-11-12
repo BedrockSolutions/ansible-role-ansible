@@ -17,8 +17,8 @@
       instance: "{{ ansible }}"
     register: ansible_validated
 
-    - set_fact:
-        ansible_v: "{{ ansible_validated.result }}"
+  - set_fact:
+      ansible_v: "{{ ansible_validated.result }}"
 
   - name: "Find files {{ ansible_v.pattern }} in directory {{ ansible_v.directory }}"
     find:
