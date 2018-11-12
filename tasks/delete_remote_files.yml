@@ -7,21 +7,29 @@
         additionalProperties:
           - command
         properties:
-          fileglob:
+          directory:
+            type: string
+          pattern:
             type: string
         required:
-          - fileglob
+          - directory
+          - pattern
       instance: "{{ ansible }}"
     register: ansible_validated
 
     - set_fact:
         ansible_v: "{{ ansible_validated.result }}"
 
-  - name: "Delete remote files {{ ansible_v.fileglob }}"
+  - name: "Find files {{ ansible_v.pattern }} in directory {{ ansible_v.directory }}"
+    find:
+      paths: "{{ ansible_v.directory }}"
+      patterns: "{{ ansible_v.pattern }}"
+    register: ansible_find_return
+
+  - name: "Remove files {{ ansible_v.pattern }} in directory {{ ansible_v.directory }}"
     file:
-      path: ~/.ansible/cp
+      path: "{{ item.path }}"
       state: absent
-    delegate_to: localhost
-    changed_when: false
+    with_items: "{{ ansible_find_return.files }}"
   tags:
     - ansible_delete_remote_files
