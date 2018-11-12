@@ -8,4 +8,4 @@
       delegate_to: localhost
       changed_when: false
   tags:
-    - common_controller_reset_connection
+    - ansible_controller_reset_connection

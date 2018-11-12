@@ -8,14 +8,15 @@
             command:
               type: string
               enum:
-                - controller_reset_connection
-                - create_ansible_temp_directory
+                - create_temp_directory
                 - delete_remote_files
                 - dependency
+                - install
+                - reset_controller_connection
           required:
             - command
-        instance: "{{ common }}"
+        instance: "{{ ansible }}"
 
-    - include_tasks: '{{ common.command }}.yml'
+    - include_tasks: '{{ ansible.command }}.yml'
   tags:
-    - common
+    - ansible
