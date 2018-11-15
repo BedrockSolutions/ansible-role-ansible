@@ -1,15 +1,11 @@
 ---
 
 - block:
-    - name: "Install git"
-      apt:
-        name: git
-      become: yes
-
-    - name: "Install cryptography dependencies"
+    - name: "Install git and cryptography dependencies"
       apt:
         name:
           - build-essential
+          - git
           - libssl-dev
           - libffi-dev
           - python-dev
