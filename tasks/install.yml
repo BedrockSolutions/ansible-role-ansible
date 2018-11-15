@@ -6,6 +6,16 @@
         name: git
       become: yes
 
+    - name: "Install cryptography dependencies"
+      apt:
+        name:
+          - build-essential
+          - libssl-dev
+          - libffi-dev
+          - python-dev
+        state: present
+      become: yes
+
     - name: "Install Ansible and dependencies"
       import_role:
         name: bedrock.python
