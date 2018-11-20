@@ -3,11 +3,13 @@
 - block:
     - name: "Create temp directory for user {{ ansible_user_id }}"
       file:
+        mode: '755'
         path: "/home/{{ ansible_user_id }}/.ansible/tmp"
         state: directory
 
     - name: "Create temp directory for the root user"
       file:
+        mode: '755'
         path: /root/.ansible/tmp
         state: directory
       become: yes
