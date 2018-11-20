@@ -1,0 +1,16 @@
+---
+
+- block:
+    - name: "Create temp directory for user {{ ansible_user_id }}"
+      file:
+        path: "/home/{{ ansible_user_id }}/.ansible/tmp"
+        state: directory
+
+    - name: "Create temp directory for the root user"
+      file:
+        path: /root/.ansible/tmp
+        state: directory
+      become: yes
+
+  tags:
+    - ansible_create_temp_directories

@@ -8,7 +8,7 @@
             command:
               type: string
               enum:
-                - create_temp_directory
+                - create_temp_directories
                 - delete_remote_files
                 - dependency
                 - install
