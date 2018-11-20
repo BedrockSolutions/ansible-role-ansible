@@ -9,7 +9,7 @@
 
     - name: "Create temp directory for the root user"
       file:
-        mode: '755'
+        mode: '700'
         path: /root/.ansible/tmp
         state: directory
       become: yes
