@@ -25,6 +25,14 @@
             - git+git://github.com/Julian/jsonschema.git
             - google-api-python-client
 
+    - name: "Disable SSH host key verification"
+      blockinfile:
+        path: "/home/{{ ansible_user_id }}/.ssh/config"
+        block: |
+          Host 10.*
+            StrictHostKeyChecking no
+            UserKnownHostsFile=/dev/null
+
     - name: "Patch broken GCP module code"
       lineinfile:
         path: "/home/ubuntu/.local/lib/{{ item }}/site-packages/ansible/module_utils/gcp_utils.py"
